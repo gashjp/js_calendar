@@ -334,6 +334,7 @@ function createCalendar(calendar, element, adjuster) {
             }
             title.appendChild(a);
           } else {
+            // popup design
             title.innerHTML +=
               '<a href="' +
               calendar.Model[n].Link +
