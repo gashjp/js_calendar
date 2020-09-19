@@ -18,6 +18,7 @@ document.getElementById("year").innerHTML = createYear;
 
 var calendar = document.getElementById("calendar");
 var lang = calendar.getAttribute("data-lang");
+const query = new URL(document.location).searchParams;
 
 var months = [
   "1月",
@@ -44,6 +45,13 @@ dayHeader += "</tr>";
 document.getElementById("thead-month").innerHTML = dayHeader;
 
 monthAndYear = document.getElementById("monthAndYear");
+
+// http://127.0.0.1:5500/calendar1.html?month=3&year=2002
+console.log("year: " + query.get("year") + ",month: " + query.get("month"));
+if (validYear(query.get("year")) && validMonth(query.get("month"))) {
+  currentMonth = Number(query.get("month"));
+  currentYear = Number(query.get("year"));
+}
 showCalendar(currentMonth, currentYear);
 
 function next() {
@@ -65,6 +73,7 @@ function jump() {
 }
 
 function showCalendar(month, year) {
+  // getDay() 曜日返す
   var firstDay = new Date(year, month).getDay();
 
   tbl = document.getElementById("calendar-body");
@@ -97,6 +106,7 @@ function showCalendar(month, year) {
         cell.className = "date-picker";
         cell.innerHTML = "<span>" + date + "</span>";
 
+        // 今日を今日調
         if (
           date === today.getDate() &&
           year === today.getFullYear() &&
@@ -114,5 +124,40 @@ function showCalendar(month, year) {
 }
 
 function daysInMonth(iMonth, iYear) {
-  return 32 - new Date(iYear, iMonth, 32).getDate();
+  // 翌月の曜日 new Date(iYear, iMonth, 32).getDate()
+  return 33 - new Date(iYear, iMonth, 33).getDate();
+}
+
+function checkCastYear(year) {
+  const numberYear = Number(year);
+  if (!numberYear) {
+    return false;
+  }
+  return true;
+}
+function validYear(year) {
+  if (!checkCastYear(year)) {
+    return false;
+  }
+  if (Number(year) < 1970 || Number(year) > new Date().getFullYear()) {
+    return false;
+  }
+  return true;
+}
+
+function checkCastMonth(month) {
+  const numberMonth = Number(month);
+  if (!numberMonth) {
+    return false;
+  }
+  return true;
+}
+function validMonth(month) {
+  if (!checkCastMonth(month)) {
+    return false;
+  }
+  if (Number(month) < 1 || Number(month) > 12) {
+    return false;
+  }
+  return true;
 }
