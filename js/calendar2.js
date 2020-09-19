@@ -341,6 +341,7 @@ function createCalendar(calendar, element, adjuster) {
               '">' +
               calendar.Model[n].Title +
               "</a>";
+            title.innerHTML += "<p>" + (i + 1) + "</p>";
           }
           number.appendChild(title);
         }

@@ -82,9 +82,13 @@ a.cld-main {
   border-radius: 5px;
   font-size: 18px;
 }
+
+/* これで表示 */
 .cld-number:hover .cld-title {
   display: block;
 }
+
+/* △ */
 .cld-title::before {
   content: "";
   position: absolute;

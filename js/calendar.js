@@ -125,6 +125,7 @@ function showCalendar(month, year) {
 
 function daysInMonth(iMonth, iYear) {
   // 翌月の曜日 new Date(iYear, iMonth, 32).getDate()
+  console.log("day: " + new Date(iYear, iMonth + 1, 0).getDate());
   return 33 - new Date(iYear, iMonth, 33).getDate();
 }
 
